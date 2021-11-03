@@ -10,8 +10,8 @@ const AddressForm = ({checkoutToken, next}) => {
 
  //   const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('IN');
-  //  const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-    const [shippingSubdivision, setShippingSubdivision] = useState('GA');
+   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
+    const [shippingSubdivision, setShippingSubdivision] = useState('');
 
  //   const [shippingOptions, setShippingOptions] = useState([]);
  //   const [shippingOption, setShippingOption] = useState('');
@@ -19,7 +19,7 @@ const AddressForm = ({checkoutToken, next}) => {
 
   //  const countries =   Object.entries(shippingCountries).map(([code, name ])=>({id: code,label:name}));
    
-  // const subdivisions =   Object.entries(shippingSubdivisions).map(([code, name ])=>({id: code,label:name}));
+const subdivisions =   Object.entries(shippingSubdivisions).map(([code, name ])=>({id: code,label:name}));
 
 
     // const setIndia = async (checkoutTokenId) => {
@@ -34,23 +34,23 @@ const AddressForm = ({checkoutToken, next}) => {
 
     // }
 
-    // const indianSubdivisions = async (countryCode) => {
-    //    const { subdivisions } = await commerce.services.localeListSubdivisions('IN');
+    const indianSubdivisions = async (countryCode) => {
+       const { subdivisions } = await commerce.services.localeListSubdivisions('IN');
     
-    //     // setShippingSubdivisions(subdivisions);
-    //     // console.log(subdivisions);
-    //     setShippingSubdivision(Object.keys(subdivisions)[9]);
-    //     console.log(shippingSubdivision);
-    //   };
+         setShippingSubdivisions(subdivisions);
+       console.log(subdivisions);
+        setShippingSubdivision(Object.keys(subdivisions)[9]);
+        console.log(shippingSubdivision);
+      };
 
     
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     setIndia(checkoutToken.id);
-    //     indianSubdivisions(shippingCountry);
-    //     console.log(shippingCountry);
-    // }, [checkoutToken.id]);
+      //  setIndia(checkoutToken.id);
+        indianSubdivisions(shippingCountry);
+        console.log(shippingCountry);
+    }, [checkoutToken]);
 
 
 
@@ -67,8 +67,7 @@ const AddressForm = ({checkoutToken, next}) => {
                         <FormInput name='lastName' label='Enter last Name'/>
                         <FormInput name='email' label='Enter Email'/>
                         <FormInput name='Adress' label='Enter Adress'/>
-                        <FormInput name='City' label='Enter City'/>
-                        <FormInput name='Zip' label='Enter Zip'/>
+                        
                             {/* <Grid item xs={12} sm={6}>
                                <InputLabel>Shipping Country</InputLabel> 
                                <Select value={shippingCountry} fullWidth onChange={(e) => setShippingCountry(e.target.value)}>
@@ -86,7 +85,7 @@ const AddressForm = ({checkoutToken, next}) => {
                                 
                             </Grid> */}
 
-                            {/* <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6}>
                                <InputLabel>Shipping Options</InputLabel> 
                                <Select value={shippingSubdivision} fullWidth onChange={(e) => setShippingSubdivision(e.target.value)}>
 
@@ -100,7 +99,10 @@ const AddressForm = ({checkoutToken, next}) => {
                                     
                                </Select>
                                 
-                            </Grid> */}
+                            </Grid>
+
+                            <FormInput name='City' label='Enter City'/>
+                        <FormInput name='Zip' label='Enter Zip'/>
                     </Grid>
 
                     <br/>
