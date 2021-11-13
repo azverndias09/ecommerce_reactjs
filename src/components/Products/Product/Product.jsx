@@ -1,20 +1,24 @@
+/* eslint-disable react/jsx-no-undef */
 import React from 'react'
 
-import {Card,CardMedia, CardContent,CardActions,Typography, IconButton} from '@material-ui/core';
+import {Card,CardMedia, CardContent,CardActions,Typography, IconButton,CardActionArea} from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
 
 import useStyles from './styles';
+import {Link} from 'react-router-dom';
 
-const Product = ({ product, onAddToCart }) => {
-
-  
-
-
+ const Product = ({product, onAddToCart,productDeets }) => {
+   
     const classes = useStyles();
-
+    
     return (
-         <Card className={classes.root}>
-              <CardMedia className={classes.media} image ={product.image.url} title={product.name} />
+        <div>
+         
+
+         <Card style={{backgroundColor: "#ffde59"}}  className={classes.root} >
+      
+         <CardActionArea component={Link} to={`/product-details/${product.id}`} >
+              <CardMedia  className={classes.media}  image ={product.image.url} title={product.name}   />
 
                 <CardContent>
                     <div className={classes.cardContent}>
@@ -43,9 +47,13 @@ const Product = ({ product, onAddToCart }) => {
                     </IconButton>
 
                  </CardActions>
-
+            </CardActionArea>
+       
          </Card>
+
+         </div>
     )
+    
 }
 
 export default Product;

@@ -2,7 +2,7 @@ import React, { useState ,useEffect} from 'react';
 
 import{ commerce } from './lib/commerce';
 import {Navbar, Products, Cart, Checkout } from './components';
-
+import      ProductPage from './components/Products/Product/ProductDetailPage';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 
 
@@ -11,6 +11,7 @@ const App = () => {
     const [cart, setCart] = useState({});
     const [order, setOrder] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
+    const [productMain,setProduct]=useState({});
 
     const fetchProducts= async ()=>{
 
@@ -19,19 +20,35 @@ const App = () => {
             setProducts(data);
 
     }
+    
 
+    
+    const fetchProductDeets= async(productId)=>{
+        
 
+   
+     
+     const {data}=await commerce.products.retrieve(productId);
+     setProduct(data);
+        
+      
+    }
+   
     const fetchCart= async()=>{
 
-              setCart(await commerce.cart.retrieve())
+              setCart(await commerce.cart.retrieve());
+            
 
     }
+
+   
 
     const handleAddToCart = async(productId,quantity)=>{
 
         const { cart }= await commerce.cart.add(productId,quantity);
 
         setCart(cart);
+      
 
   }
 
@@ -71,6 +88,8 @@ const App = () => {
 
             setCart(newCart);
         }
+
+      
     const handleCaptureCheckout = async(checkoutTokenId,newOrder)=>{    
 
         try{
@@ -86,7 +105,6 @@ const App = () => {
 
 
     }
-
 
 
       
@@ -121,6 +139,16 @@ const App = () => {
                             error={errorMessage}
                             
                             />
+
+
+                        </Route>
+
+                        <Route path="/product-details/:id">
+                            {/* <ProductPage product={products[0]} /> */}
+
+                           
+                            <ProductPage productMain={productMain} productDeets={fetchProductDeets}/>
+                           
 
 
                         </Route>
