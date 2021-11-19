@@ -1,24 +1,49 @@
-import { makeStyles, alpha } from '@material-ui/core/styles';
+import { makeStyles, alpha, } from '@material-ui/core/styles';
 
-const drawerWidth = 0;
+const drawerWidth =0;
 
-export default makeStyles((theme) => ({
+
+export default makeStyles(
+
+  (theme) => ({
+ 
   appBar: {
     boxShadow: 'none',
+   
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      
+   
     },
+
   },
+  
+
+
+    textDec:{ fontFamily:'Raleway'},
   title: {
+
     flexGrow: 1,
+    marginLeft:'10px',
+    alignItems: 'center',
+    display: 'flex',
+    textDecoration: 'none',
+  },
+
+  subtitle: {
+    
+    flexGrow: 1,
+    marginLeft:'10px',
+    marginRight:'10px',
     alignItems: 'center',
     display: 'flex',
     textDecoration: 'none',
   },
   image: {
     marginRight: '10px',
+  
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -27,7 +52,10 @@ export default makeStyles((theme) => ({
     },
   },
   grow: {
+    
     flexGrow: 1,
+    marginLeft:'10px',
+    marginRight:'10px',
   },
   search: {
     position: 'relative',
@@ -65,4 +93,8 @@ export default makeStyles((theme) => ({
       width: '20ch',
     },
   },
-}));
+}),
+
+
+
+);

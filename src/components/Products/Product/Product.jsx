@@ -18,7 +18,7 @@ import {Link} from 'react-router-dom';
          <Card style={{backgroundColor: "#ffde59"}}  className={classes.root} >
       
          <CardActionArea component={Link} to={`/product-details/${product.id}`} >
-              <CardMedia  className={classes.media}  image ={product.image.url} title={product.name}   />
+              <CardMedia  className={classes.media}    image ={product.image.url} title={product.name}   />
 
                 <CardContent>
                     <div className={classes.cardContent}>

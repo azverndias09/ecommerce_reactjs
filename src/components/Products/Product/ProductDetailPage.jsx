@@ -13,23 +13,27 @@ const ProductPage =()=> {
             padding: '0 30px',
             border:0,
             borderRadius:3,
-            width:500,
-            height:500,
-
+          
 
 
         },
         
         cardDet:{
-            display:'inline-block',
+           
             backgroundColor: "#ffde59",
-            padding:'50px',
-            margin:'50px',
+           
+            
+            marginTop:'80px',
+            marginLeft:'10px',
         
 
         },
+        media:{
 
-   });
+            height:260,
+        }
+
+         });
     const classes = useStyles();
     
   const [productMain,setProduct]=useState({});
@@ -74,11 +78,11 @@ const ProductPage =()=> {
     const GotProduct=()=>(
         
        
-        <Grid>
-       
+        <Grid container justifyContent="start" spacing={2}>
+        <Grid  item xs={12} sm={6} md={4} lg={3}>
         <Card  className={classes.cardDet}>
 
-        <CardMedia image={productMain.image.url} title={productMain.name}/>
+        <CardMedia image={productMain.image.url} className={classes.media} title={productMain.name}/>
        
                 <CardContent>
                     <div className={classes.cardContent} >
@@ -101,7 +105,7 @@ const ProductPage =()=> {
        
                 
          </Card>
-      
+         </Grid> 
          </Grid>
         );
 
