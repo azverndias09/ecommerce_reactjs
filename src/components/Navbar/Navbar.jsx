@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppBar,Toolbar, IconButton, Badge, Typography,Box } from '@material-ui/core';
+import { AppBar,IconButton,Toolbar,Badge, Typography,Box } from '@material-ui/core';
 import { ContactPhone, Home, ShoppingCart } from '@material-ui/icons';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import HomeIcon from '@material-ui/icons/Home';
@@ -68,7 +68,7 @@ const NavBar = ({totalItems}) => {
 
 
                         <div className={classes.grow} />
-                        {location.pathname ==='/'&&(
+                        
                         <div >
 
                             <IconButton component={Link} to="/cart" aria-label="show Cart items" color="inherit">
@@ -77,7 +77,7 @@ const NavBar = ({totalItems}) => {
                                 </Badge>
                             </IconButton>
 
-                        </div>)}
+                        </div>
         
       </Box>
                         

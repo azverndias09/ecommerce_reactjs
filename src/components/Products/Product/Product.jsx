@@ -39,15 +39,16 @@ import {Link} from 'react-router-dom';
 
                 </CardContent>
 
-                 <CardActions disableSpacing className={classes.cardActions}> 
-
-                    <IconButton aria-label ="Add To Cart" onClick={() => onAddToCart(product.id,1)}>
-                       
-                       <AddShoppingCart/>
-                    </IconButton>
-
-                 </CardActions>
+               
             </CardActionArea>
+            <CardActions disableSpacing className={classes.cardActions}> 
+
+<IconButton color="primary" size="large" aria-label ="Add To Cart" onClick={() => onAddToCart(product.id,1)}>
+   
+   <AddShoppingCart fontSize="inherit"/>
+</IconButton>
+
+</CardActions>
        
          </Card>
 

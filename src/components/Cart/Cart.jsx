@@ -1,10 +1,10 @@
 import React from 'react'
-import {Container,Typography,Button,Grid} from '@material-ui/core';
+import {Container,Typography,Button,Grid,AppBar,Toolbar,IconButton,Box} from '@material-ui/core';
 
 import useStyles from './styles';
 import CartItem from './CartItem/CartItem';
 import {Link} from 'react-router-dom';
-
+import { AddShoppingCart } from '@material-ui/icons';
 
 const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart }) => {
   
@@ -36,8 +36,9 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
             ))}
 
         </Grid>
-
+                <Container >
             <div className={classes.cardDetails}>
+                
                     <Typography variant="h4">
                         Subtotal:{cart.subtotal.formatted_with_symbol}</Typography>
                        
@@ -51,10 +52,11 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                             </Button>
                         </div>
 
-           
+                      
 
             </div>  
-
+            </Container>
+           
         </>
 
 
@@ -69,7 +71,22 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
             </Typography>
            
             {!cart.total_unique_items?<EmptyCart /> : <FilledCart />}
-            
+           
+            {/* <AppBar positionMode="fixed" position="bottom"  color="primary" >
+        <Toolbar>
+          <IconButton color="inherit" aria-label="open drawer">
+            <AddShoppingCart />
+          </IconButton>
+        
+          <Box sx={{ flexGrow: 1 }} />
+          <IconButton color="inherit">
+            <AddShoppingCart />
+          </IconButton>
+          <IconButton color="inherit">
+            <AddShoppingCart />
+          </IconButton>
+        </Toolbar>
+      </AppBar> */}
         </Container>
     )
 }
