@@ -1,11 +1,7 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect } from "react";
 import { commerce } from "../../../lib/commerce";
 
-import Carousel from 'react-material-ui-carousel';
-
-
 import {
-  Paper,
   Box,
   FormControl,
   MenuItem,
@@ -14,23 +10,19 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Typography,
   Grid,
   Container,
   CircularProgress,
   Backdrop,
   Button,
-  BottomNavigation,
-  BottomNavigationAction,
-  TextField,
 } from "@material-ui/core";
-import { Link, params, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 
 import { AddShoppingCart } from "@material-ui/icons";
 
-const ProductPage = () => {
+const ProductPage = ({ onAddToCart }) => {
   const useStyles = makeStyles({
     root: {
       padding: "0 30px",
@@ -46,14 +38,19 @@ const ProductPage = () => {
       marginRight: "10px",
     },
     cardDet2: {
-    
-      backgroundColor:"#12a152",
+      backgroundColor: "#12a152",
+      marginTop: "10px",
+      marginLeft: "10px",
+      marginRight: "10px",
+    },
+    cardDet3: {
+      backgroundColor: "#7b32a8",
       marginTop: "10px",
       marginLeft: "10px",
       marginRight: "10px",
     },
     media: {
-      height: 260,
+      height: 200,
     },
   });
 
@@ -64,17 +61,17 @@ const ProductPage = () => {
   const [size, setSize] = useState(' ');
   const [color, setColor] = useState(' ');
 
-
   const getProductDeets = async function (productId) {
     const result = await commerce.products.retrieve(productId);
+    console.log(result);
     return result;
   };
-  console.log("line9");
-  const { id } = useParams();
 
+  const { id } = useParams();
 
   const handleSizeChange = (event) => {
     setSize(event.target.value);
+    console.log(size);
   };
 
   const handleColorChange = (event) => {
@@ -84,7 +81,7 @@ const ProductPage = () => {
   const getData = async () => {
     try {
       let product = await getProductDeets(id);
-      console.log("inside async");
+     
       setProduct(product);
       setLoading(true);
     } catch (e) {
@@ -94,14 +91,11 @@ const ProductPage = () => {
 
   useEffect(() => {
     getData();
-    console.log(productMain);
+  
   }, []);
 
   const NotGot = () => (
     <Container style={{ paddingTop: "80px" }}>
-      {/* <Typography variant="h6">Loading
-            </Typography> */}
-
       <Backdrop sx={{ color: "#4287f5" }} open>
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -122,7 +116,7 @@ const ProductPage = () => {
             <div className={classes.cardContent}>
               <Box
                 sx={{
-                    justifyContent: 'space-between',
+                  justifyContent: "space-between",
                   display: "flex",
                   flexDirection: "row",
                 }}
@@ -132,7 +126,6 @@ const ProductPage = () => {
                     {productMain.name}
                   </Typography>
                 </Box>
-                
               </Box>
               <Typography variant="h5">
                 {productMain.price.formatted_with_symbol}
@@ -147,67 +140,80 @@ const ProductPage = () => {
           </CardContent>
         </Card>
 
-
         <Card className={classes.cardDet2}>
-        <CardContent>
-                
-        <Box  sx={{
-                    justifyContent: 'space-between',
-                  display: "flex",
-                  flexDirection: "row",
-                }}>
-
-            <Box>
-
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="size-input">Size</InputLabel>
-        <Select
-          labelId="size-label"
-          id="demo-simple-select-autowidth"
-          value={size}
-          onChange={handleSizeChange}
-          autoWidth
-          label="Size"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>S</MenuItem>
-          <MenuItem value={21}>M</MenuItem>
-          <MenuItem value={22}>L</MenuItem>
-        </Select>
-      </FormControl>
+          <CardContent>
+            <Box
+              sx={{
+                justifyContent: "space-between",
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <Box>
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <InputLabel id="size-input">Size</InputLabel>
+                  <Select
+                    labelId="size-label"
+                    id="demo-simple-select-autowidth"
+                    value={size}
+                    onChange={handleSizeChange}
+                    autoWidth
+                    label="Size"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={"S"}>S</MenuItem>
+                    <MenuItem value={"M"}>M</MenuItem>
+                    <MenuItem value={"L"}>L</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
 
               <Box>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="color-input">Color</InputLabel>
-        <Select
-          labelId="color-input"
-          id="color-changer"
-          value={color}
-          onChange={handleColorChange}
-          autoWidth
-          label="Color"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Red</MenuItem>
-          <MenuItem value={21}>Black</MenuItem>
-          <MenuItem value={22}>Blue</MenuItem>
-        </Select>
-      </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <InputLabel id="color-input">Color</InputLabel>
+                  <Select
+                    labelId="color-input"
+                    id="color-changer"
+                    value={color}
+                    onChange={handleColorChange}
+                    autoWidth
+                    label="Color"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Red</MenuItem>
+                    <MenuItem value={21}>Black</MenuItem>
+                    <MenuItem value={22}>Blue</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
-
-
-        </Box>
+            </Box>
           </CardContent>
-
-          </Card>
+        </Card>
       </Grid>
-
-      
+      <Card className={classes.cardDet3}>
+        <CardContent>
+          <Box
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <Button
+              size="large"
+              variant="contained"
+              endIcon={<AddShoppingCart />}
+              onClick={() => onAddToCart(productMain.id, 1)}
+            >
+              ADD TO CART
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
     </Grid>
   );
 

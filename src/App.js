@@ -147,7 +147,7 @@ const App = () => {
                             {/* <ProductPage product={products[0]} /> */}
 
                            
-                            <ProductPage productMain={productMain} productDeets={fetchProductDeets}/>
+                            <ProductPage productMain={productMain} productDeets={fetchProductDeets} onAddToCart={handleAddToCart}/>
                            
 
 
