@@ -1,6 +1,11 @@
 import { React, useState, useEffect, useRef } from "react";
 import { commerce } from "../../../lib/commerce";
+
+import Carousel from 'react-material-ui-carousel';
+
+
 import {
+  Paper,
   Box,
   FormControl,
   MenuItem,
@@ -18,6 +23,7 @@ import {
   Button,
   BottomNavigation,
   BottomNavigationAction,
+  TextField,
 } from "@material-ui/core";
 import { Link, params, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
@@ -39,6 +45,13 @@ const ProductPage = () => {
       marginLeft: "10px",
       marginRight: "10px",
     },
+    cardDet2: {
+    
+      backgroundColor:"#12a152",
+      marginTop: "10px",
+      marginLeft: "10px",
+      marginRight: "10px",
+    },
     media: {
       height: 260,
     },
@@ -48,6 +61,9 @@ const ProductPage = () => {
 
   const [productMain, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
+  const [size, setSize] = useState(' ');
+  const [color, setColor] = useState(' ');
+
 
   const getProductDeets = async function (productId) {
     const result = await commerce.products.retrieve(productId);
@@ -55,6 +71,15 @@ const ProductPage = () => {
   };
   console.log("line9");
   const { id } = useParams();
+
+
+  const handleSizeChange = (event) => {
+    setSize(event.target.value);
+  };
+
+  const handleColorChange = (event) => {
+    setColor(event.target.value);
+  };
 
   const getData = async () => {
     try {
@@ -107,28 +132,7 @@ const ProductPage = () => {
                     {productMain.name}
                   </Typography>
                 </Box>
-                <Box marginRight="10px" marginTop="8px">
-                <div>
-      <FormControl sx={{ m: 1, minWidth: 80}}>
-        <InputLabel id="demo-simple-select-autowidth-label">Size</InputLabel>
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-            
-          onChange={console.log("Size")}
-          autoWidth
-          label="Size"
-        >
-          <MenuItem value="    ">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Small</MenuItem>
-          <MenuItem value={21}>Medium</MenuItem>
-          <MenuItem value={22}>Large</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
-                </Box>
+                
               </Box>
               <Typography variant="h5">
                 {productMain.price.formatted_with_symbol}
@@ -142,7 +146,68 @@ const ProductPage = () => {
             </div>
           </CardContent>
         </Card>
+
+
+        <Card className={classes.cardDet2}>
+        <CardContent>
+                
+        <Box  sx={{
+                    justifyContent: 'space-between',
+                  display: "flex",
+                  flexDirection: "row",
+                }}>
+
+            <Box>
+
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="size-input">Size</InputLabel>
+        <Select
+          labelId="size-label"
+          id="demo-simple-select-autowidth"
+          value={size}
+          onChange={handleSizeChange}
+          autoWidth
+          label="Size"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>S</MenuItem>
+          <MenuItem value={21}>M</MenuItem>
+          <MenuItem value={22}>L</MenuItem>
+        </Select>
+      </FormControl>
+              </Box>
+
+              <Box>
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="color-input">Color</InputLabel>
+        <Select
+          labelId="color-input"
+          id="color-changer"
+          value={color}
+          onChange={handleColorChange}
+          autoWidth
+          label="Color"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Red</MenuItem>
+          <MenuItem value={21}>Black</MenuItem>
+          <MenuItem value={22}>Blue</MenuItem>
+        </Select>
+      </FormControl>
+              </Box>
+
+
+        </Box>
+          </CardContent>
+
+          </Card>
       </Grid>
+
+      
     </Grid>
   );
 
